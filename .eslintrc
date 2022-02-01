@@ -1,0 +1,16 @@
+{
+  "extends": [
+    "airbnb", "plugin:prettier/recommended",
+    "plugin:node/recommended",
+    "plugin:security/recommended",
+    "plugin:mocha/recommended"
+  ],
+  "plugins": ["simple-import-sort"],
+  "rules": {
+    "prettier/prettier": ["error"]
+  },
+  "no-unused-vars": "warn",
+  "no-var": "error",
+  "no-console": "warn",
+  "no-debugger": "warn"
+}
