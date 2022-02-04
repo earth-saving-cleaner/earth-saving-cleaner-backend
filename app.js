@@ -27,6 +27,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 app.use(require("./routes"));
+console.log("TEST");
 
 app.use((req, res, next) => {
   next(createError(404));
