@@ -3,8 +3,11 @@ const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
 const geoSchema = new Schema({
-  type: { type: String },
-  enum: ["Point"],
+  type: {
+    type: String,
+    enum: ["Point"],
+    required: true,
+  },
   coordinates: {
     type: [Number],
     required: true,
