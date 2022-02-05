@@ -7,6 +7,7 @@ const cors = require("cors");
 const http = require("http");
 const logger = require("morgan");
 
+const { resultMsg } = require("./constants");
 const webSocket = require("./loaders/socketIo");
 require("./loaders/database");
 
@@ -39,7 +40,7 @@ app.use((err, req, res, next) => {
   res.locals.error = req.app.get("env") === "development" ? err : {};
 
   res.status(err.status || 500);
-  res.json({ code: res.status, message: result.serverError });
+  res.json({ code: err.status || 500, result: resultMsg.fail, message: resultMsg.serverError });
 });
 
 server.listen(port);
