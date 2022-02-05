@@ -32,7 +32,7 @@ app.use((req, res, next) => {
   next(createError(404));
 });
 
-app.use(function (err, req, res, next) {
+app.use((err, req, res, next) => {
   console.error(err);
 
   res.locals.message = err.message || result.serverError;
@@ -40,13 +40,6 @@ app.use(function (err, req, res, next) {
 
   res.status(err.status || 500);
   res.json({ code: res.status, message: result.serverError });
-});
-
-app.use((err, req, res, next) => {
-  res.status(err.status || 500);
-  res.json({
-    code: res.status,
-  });
 });
 
 server.listen(port);
