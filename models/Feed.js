@@ -21,7 +21,7 @@ const feedSchema = new Schema({
     type: String,
     maxLength: 400,
   },
-  position: {
+  location: {
     type: ObjectId,
     ref: "Geo",
     require: [true, "Please provide Geo information"],
