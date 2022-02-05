@@ -5,44 +5,48 @@ const {
   Types: { ObjectId },
 } = Schema;
 
-const feedSchema = new Schema({
-  author: {
-    type: ObjectId,
-    ref: "User",
-    required: true,
-  },
-  image: [
-    {
-      type: String,
-      require: [true, "Please provide image url"],
-    },
-  ],
-  content: {
-    type: String,
-    maxLength: 400,
-  },
-  location: {
-    type: ObjectId,
-    ref: "Geo",
-    require: [true, "Please provide Geo information"],
-  },
-  like: [
-    {
+const feedSchema = new Schema(
+  {
+    author: {
       type: ObjectId,
       ref: "User",
+      required: true,
     },
-  ],
-  comment: [
-    {
+    image: [
+      {
+        type: String,
+        require: [true, "Please provide image url"],
+      },
+    ],
+    content: {
+      type: String,
+      maxLength: 400,
+    },
+    location: {
       type: ObjectId,
-      ref: "Comment",
+      ref: "Geo",
+      require: [true, "Please provide Geo information"],
     },
-  ],
-  cleaned: {
-    type: Boolean,
-    default: false,
+    like: [
+      {
+        type: ObjectId,
+        ref: "User",
+      },
+    ],
+    comment: [
+      {
+        type: ObjectId,
+        ref: "Comment",
+      },
+    ],
+    cleaned: {
+      type: Boolean,
+      default: false,
+    },
   },
-  timestamps: { createdAt: true },
-});
+  {
+    timestamps: true,
+  },
+);
 
 module.exports = mongoose.model("Feed", feedSchema);
