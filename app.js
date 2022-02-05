@@ -39,8 +39,11 @@ app.use((err, req, res, next) => {
   res.locals.message = err.message || result.serverError;
   res.locals.error = req.app.get("env") === "development" ? err : {};
 
+  const code = err.status || 500;
+  const message = err.message || resultMsg.serverError;
+
   res.status(err.status || 500);
-  res.json({ code: err.status || 500, result: resultMsg.fail, message: resultMsg.serverError });
+  res.json({ code, result: resultMsg.fail, message });
 });
 
 server.listen(port);
