@@ -38,6 +38,10 @@ const feedSchema = new Schema({
       ref: "Comment",
     },
   ],
+  cleaned: {
+    type: Boolean,
+    default: false,
+  },
   timestamps: { createdAt: true },
 });
 
