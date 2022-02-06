@@ -23,3 +23,20 @@ exports.getFeeds = async (option) => {
     .populate("location")
     .exec();
 };
+
+exports.getFeed = async (id) => {
+  id = mongoose.Types.ObjectId(id);
+
+  return await Feed.findOne({ author: id })
+    .populate("author", "nickname profileImage")
+    .populate("location")
+    .populate("comment", "nickname profileImage")
+    .populate({
+      path: "comment",
+      populate: {
+        path: "author",
+        select: "nickname profileImage",
+      },
+    })
+    .exec();
+};
