@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 
 const Feed = require("../models/Feed");
+const Comment = require("../models/Comment");
 
 exports.getFeeds = async (option) => {
   const { lastId, limit } = option;
@@ -39,4 +40,20 @@ exports.getFeed = async (id) => {
       },
     })
     .exec();
+};
+
+exports.createComment = async (option) => {
+  option.id = mongoose.Types.ObjectId(option.id);
+  option.userId = mongoose.Types.ObjectId(option.userId);
+
+  const comment = await Comment.create({ author: option.userId, content: option.content });
+  const feedComments = await Feed.findByIdAndUpdate(
+    option.id,
+    { $push: { comment: comment._id } },
+    { safe: true, upsert: true, new: true, populate: { path: "comment" } },
+  )
+    .select("comment")
+    .exec();
+
+  return feedComments;
 };

@@ -6,6 +6,7 @@ const AWS = require("aws-sdk");
 const multerS3 = require("multer-s3");
 
 const feedController = require("../contorollers/feed");
+const { commentValidationRules, validate } = require("../middlewares/validator");
 
 const router = express.Router();
 
@@ -32,6 +33,8 @@ router.post("/img", upload.single("img"), (req, res) => {
   const url = originalUrl.replace(/\/original\//, "/thumb/");
   res.json({ url, originalUrl: req.file.location });
 });
+
+router.post("/:id/comment", commentValidationRules(), validate, feedController.createComment);
 
 router.get("/:id", feedController.getFeed);
 

@@ -49,6 +49,29 @@ exports.getFeed = async (req, res, next) => {
   }
 };
 
+exports.createComment = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const { userId, content } = req.body;
+
+    if (!mongoose.isValidObjectId(id)) {
+      next(createError(400, "Invalid feed id"));
+    }
+
+    if (!mongoose.isValidObjectId(userId)) {
+      next(createError(400, "Invalid user id"));
+    }
+
+    const comments = await feedService.createComment({ id, userId, content });
+    res.json({
+      result: resultMsg.ok,
+      data: comments,
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
 const validateLimit = (limit) => {
   const LIMIT = 30;
 
