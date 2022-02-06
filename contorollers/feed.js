@@ -21,12 +21,31 @@ exports.getFeeds = async (req, res, next) => {
     const result = {
       result: resultMsg.ok,
       lastId: feeds[feeds.length - 1]._id,
-      feeds,
+      data: feeds,
     };
 
     res.json(result);
-  } catch (error) {
-    next(error);
+  } catch (err) {
+    next(err);
+  }
+};
+
+exports.getFeed = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+
+    if (!mongoose.isValidObjectId(id)) {
+      next(createError(400, "Invalid feed id"));
+    }
+
+    const feed = await feedService.getFeed(id);
+
+    res.json({
+      result: resultMsg.ok,
+      data: feed,
+    });
+  } catch (err) {
+    next(err);
   }
 };
 
