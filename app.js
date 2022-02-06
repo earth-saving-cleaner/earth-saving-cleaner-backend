@@ -40,7 +40,7 @@ app.use((err, req, res, next) => {
   res.locals.error = req.app.get("env") === "development" ? err : {};
 
   const code = err.status || 500;
-  const message = err.message || resultMsg.serverError;
+  const message = code === 500 ? resultMsg.serverError : err.message;
 
   res.status(err.status || 500);
   res.json({ code, result: resultMsg.fail, message });
