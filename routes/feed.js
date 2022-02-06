@@ -33,6 +33,8 @@ router.post("/img", upload.single("img"), (req, res) => {
   res.json({ url, originalUrl: req.file.location });
 });
 
+router.put("/:id/like", feedController.addLikeUser);
+
 router.get("/:id", feedController.getFeed);
 
 module.exports = router;

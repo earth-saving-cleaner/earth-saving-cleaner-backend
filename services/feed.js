@@ -40,3 +40,14 @@ exports.getFeed = async (id) => {
     })
     .exec();
 };
+
+exports.addLikeUser = async (option) => {
+  option.id = mongoose.Types.ObjectId(option.id);
+  option.userId = mongoose.Types.ObjectId(option.userId);
+
+  return await Feed.findByIdAndUpdate(
+    option.id,
+    { $addToSet: { like: option.userId } },
+    { safe: true, upsert: true, new: true },
+  ).exec();
+};

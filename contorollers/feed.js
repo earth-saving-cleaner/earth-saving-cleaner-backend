@@ -43,3 +43,27 @@ exports.getFeed = async (req, res, next) => {
     next(err);
   }
 };
+
+exports.addLikeUser = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const { userId } = req.body;
+
+    if (!mongoose.isValidObjectId(id)) {
+      next(createError(400, "Invalid feed id"));
+    }
+
+    if (!mongoose.isValidObjectId(userId)) {
+      next(createError(400, "Invalid user id"));
+    }
+
+    const feed = await feedService.addLikeUser({ id, userId });
+
+    res.json({
+      result: resultMsg.ok,
+      data: feed,
+    });
+  } catch (err) {
+    next(err);
+  }
+};
