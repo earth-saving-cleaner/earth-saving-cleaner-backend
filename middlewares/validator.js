@@ -25,7 +25,7 @@ const validate = (req, res, next) => {
   let errorMessages = "";
   errors.array().map((err) => (errorMessages += `${err.msg}. `));
 
-  res.status(400).json({ code: 400, result: resultMsg.fail, message: resultMsg.badRequest });
+  res.status(400).json({ result: resultMsg.fail, message: resultMsg.badRequest });
 };
 
 module.exports = {
