@@ -7,9 +7,14 @@ const { resultMsg } = require("../constants");
 exports.getFeeds = async (req, res, next) => {
   try {
     const { id, limit } = req.query;
+
+    if (id && !mongoose.isValidObjectId(id)) {
+      next(createError(400, "Invalid feed last feed id"));
+    }
+
     const option = {
       lastId: id,
-      limit: limit || 30,
+      limit: validateLimit(limit),
     };
 
     const feeds = await feedService.getFeeds(option);
@@ -66,4 +71,17 @@ exports.addLikeUser = async (req, res, next) => {
   } catch (err) {
     next(err);
   }
+
+const validateLimit = (limit) => {
+  const LIMIT = 30;
+
+  if (typeof limit !== "number" || typeof limit !== "string") {
+    return LIMIT;
+  }
+
+  if (limit <= 0) {
+    return LIMIT;
+  }
+
+  return Number(limit);
 };
