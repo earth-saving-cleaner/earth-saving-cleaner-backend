@@ -43,7 +43,7 @@ app.use((err, req, res, next) => {
   const message = code === 500 ? resultMsg.serverError : err.message;
 
   res.status(err.status || 500);
-  res.json({ code, result: resultMsg.fail, message });
+  res.json({ result: resultMsg.fail, message });
 });
 
 server.listen(port);
