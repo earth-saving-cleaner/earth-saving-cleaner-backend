@@ -35,6 +35,7 @@ router.post("/img", upload.single("img"), (req, res) => {
 });
 
 router.post("/:id/comment", commentValidationRules(), validate, feedController.createComment);
+router.put("/:id/like", feedController.addLikeUser);
 
 router.get("/:id", feedController.getFeed);
 
