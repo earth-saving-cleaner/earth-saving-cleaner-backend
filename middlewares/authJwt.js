@@ -1,9 +1,10 @@
 const jwt = require("../services/jwt");
 const { resultMsg } = require("../constants");
 
-const authJWT = (req, res, next) => {
+const authJWT = async (req, res, next) => {
   const unauthorizedResult = {
-    result: resultMsg.unauthorized,
+    result: resultMsg.fail,
+    message: resultMsg.unauthorized,
   };
 
   if (!req.headers.authorization) return res.status(401).json(unauthorizedResult);
@@ -13,15 +14,19 @@ const authJWT = (req, res, next) => {
   try {
     const myToken = await jwt.verify(token);
 
-    if (myToken.result.ok) {
+    if (myToken) {
       req.id = myToken.id;
       req.email = myToken.email;
       next();
     } else {
       return res.status(401).json(unauthorizedResult);
     }
-  } catch (error) {
-    res.status(500).json(serverError);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({
+      result: resultMsg.fail,
+      message: resultMsg.serverError,
+    });
   }
 };
 

@@ -1,13 +1,14 @@
 const jwt = require("jsonwebtoken");
+const { OAuth2Client } = require("google-auth-library");
+
+const { resultMsg } = require("../constants");
+
+const client = new OAuth2Client(process.env.CLIENT_ID);
 
 const secretKey = process.env.JWT_SECRET_KEY;
 const accessTokenOption = {
   algorithm: "HS256",
   expiresIn: "1h",
-};
-const refreshTokenOption = {
-  algorithm: "HS256",
-  expiresIn: "14d",
 };
 
 module.exports = {
@@ -18,7 +19,6 @@ module.exports = {
     };
     const result = {
       accessToken: jwt.sign(payload, secretKey, accessTokenOption),
-      refreshToken: jwt.sign(payload, secretKey, refreshTokenOption),
     };
 
     return result;
@@ -27,16 +27,32 @@ module.exports = {
     let decoded = null;
 
     try {
-      decoded = jwt.verify(token, secretKey);
+      decoded = await jwt.verify(token, secretKey);
+    } catch (err) {
+      return err.message;
+    }
+
+    return decoded;
+  },
+  verifyGoogleToken: async (token) => {
+    try {
+      const ticket = await client.verifyIdToken({
+        idToken: token,
+        audience: process.env.CLIENT_ID,
+      });
+      const { sub, email, picture } = ticket.getPayload();
+
       return {
         result: resultMsg.ok,
-        id: decoded.id,
-        email: decoded.email,
+        sub,
+        email,
+        picture,
       };
-    } catch (error) {
+    } catch (err) {
+      console.error(err);
       return {
         result: resultMsg.fail,
-        message: error.message,
+        message: err.message,
       };
     }
   },
