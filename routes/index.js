@@ -13,7 +13,7 @@ const Plogging = require("../models/Plogging");
 const router = express.Router();
 
 router.use("/user", user);
-router.get("/feeds", getFeeds);
 router.use("/feed", feed);
+router.get("/feeds", getFeeds);
 
 module.exports = router;
