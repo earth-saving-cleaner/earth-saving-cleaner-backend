@@ -23,10 +23,17 @@ const authJWT = async (req, res, next) => {
     }
   } catch (err) {
     console.error(err);
-    res.status(500).json({
-      result: resultMsg.fail,
-      message: resultMsg.serverError,
-    });
+    if (err.message === "jwt expired") {
+      return res.status(500).json({
+        result: resultMsg.fail,
+        message: "토큰 유효기간이 만료되었습니다. 로그인이 필요합니다",
+      });
+    } else {
+      return res.status(500).json({
+        result: resultMsg.fail,
+        message: resultMsg.serverError,
+      });
+    }
   }
 };
 
