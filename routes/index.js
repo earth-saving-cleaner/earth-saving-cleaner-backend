@@ -1,8 +1,8 @@
 const express = require("express");
 
 const { getUser } = require("../contorollers/user");
-const { getFeeds } = require("../contorollers/feed");
 const feed = require("./feed");
+const feeds = require("./feeds");
 const user = require("./user");
 const login = require("./login");
 
@@ -14,7 +14,7 @@ const Plogging = require("../models/Plogging");
 const router = express.Router();
 
 router.use("/user", user);
-router.get("/feeds", getFeeds);
+router.use("/feeds", feeds);
 router.use("/feed", feed);
 router.use("/login", login);
 
