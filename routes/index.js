@@ -4,6 +4,7 @@ const { getUser } = require("../contorollers/user");
 const feed = require("./feed");
 const feeds = require("./feeds");
 const user = require("./user");
+const login = require("./login");
 
 const User = require("../models/User");
 const Commemt = require("../models/Comment");
@@ -15,5 +16,6 @@ const router = express.Router();
 router.use("/user", user);
 router.use("/feeds", feeds);
 router.use("/feed", feed);
+router.use("/login", login);
 
 module.exports = router;
