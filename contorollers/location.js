@@ -5,14 +5,14 @@ const { resultMsg } = require("../constants");
 exports.getFeedsLocation = async (req, res, next) => {
   try {
     const { coordinates } = req.query;
-    const { nwLng, nwLat, seLng, seLat } = JSON.parse(coordinates);
+    const { NWlongitude, NWlatitude, SElongitude, SElatitude } = JSON.parse(coordinates);
 
     const polygonCoordinates = [
-      [nwLng, nwLat],
-      [seLng, nwLat],
-      [seLng, seLat],
-      [nwLng, seLat],
-      [nwLng, nwLat],
+      [NWlongitude, NWlatitude],
+      [SElongitude, NWlatitude],
+      [SElongitude, SElatitude],
+      [NWlongitude, SElatitude],
+      [NWlongitude, NWlatitude],
     ];
 
     const feedInfo = await locationService.getFeedsLocation(polygonCoordinates);
