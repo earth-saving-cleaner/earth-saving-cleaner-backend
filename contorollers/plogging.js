@@ -27,9 +27,6 @@ exports.addPlogging = async (req, res, next) => {
       result: resultMsg.ok,
     });
   } catch (err) {
-    res.status(400).json({
-      result: resultMsg.fail,
-      message: resultMsg.badRequest,
-    });
+    next(err);
   }
 };
