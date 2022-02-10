@@ -7,3 +7,7 @@ exports.getUser = async (userId) => {
 
   return await User.findOne({ _id: id }).select("nickname level score totalScore profileImage");
 };
+
+exports.addUserScore = async (userId) => {
+  await User.findByIdAndUpdate(userId, { $inc: { score: 1 } });
+};
