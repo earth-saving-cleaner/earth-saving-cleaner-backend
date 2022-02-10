@@ -9,5 +9,8 @@ exports.getUser = async (userId) => {
 };
 
 exports.addUserScore = async (userId) => {
-  await User.findByIdAndUpdate(userId, { $inc: { score: 1 } });
+  const { score } = await User.findOne({ _id: userId }).select("score");
+  const level = score % 10 === 0 ? 1 : 0;
+
+  await User.findByIdAndUpdate(userId, { $inc: { score: 1, level } });
 };
