@@ -70,5 +70,5 @@ exports.addLikeUser = async (option) => {
 };
 
 exports.addCleanTrue = async (id) => {
-  await Feed.findOneAndUpdate(id, { $set: { cleaned: true } });
+  return await Feed.findOneAndUpdate(id, { $set: { cleaned: true } }, { new: true });
 };

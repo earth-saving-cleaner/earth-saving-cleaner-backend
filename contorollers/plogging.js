@@ -19,12 +19,16 @@ exports.addPlogging = async (req, res, next) => {
       next(createError(400, resultMsg.invalidUserId));
     }
 
+    const updatedFeed = await feedService.addCleanTrue(id);
+    const updatedUser = await userService.addUserScore(userId);
     await ploggingService.addPlogging({ userId, id });
-    await feedService.addCleanTrue(id);
-    await userService.addUserScore(userId);
 
     res.json({
       result: resultMsg.ok,
+      updatedInfo: {
+        updatedFeed,
+        updatedUser,
+      },
     });
   } catch (err) {
     next(err);
