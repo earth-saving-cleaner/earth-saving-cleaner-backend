@@ -28,7 +28,7 @@ exports.getFeeds = async (option) => {
 exports.getFeed = async (id) => {
   id = mongoose.Types.ObjectId(id);
 
-  return await Feed.findOne({ author: id })
+  return await Feed.findOne({ _id: id })
     .populate("author", "nickname profileImage")
     .populate("location")
     .populate("comment", "nickname profileImage")
