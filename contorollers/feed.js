@@ -54,11 +54,14 @@ exports.addLikeUser = async (req, res, next) => {
     const { id } = req.params;
     const { userId } = req.body;
 
-    if (!mongoose.isValidObjectId(id)) {
+    const objectId = mongoose.Types.ObjectId(id);
+    const objectUserId = mongoose.Types.ObjectId(userId);
+
+    if (!mongoose.isValidObjectId(objectId)) {
       next(createError(400, "Invalid feed id"));
     }
 
-    if (!mongoose.isValidObjectId(userId)) {
+    if (!mongoose.isValidObjectId(objectUserId)) {
       next(createError(400, "Invalid user id"));
     }
 
@@ -99,11 +102,11 @@ exports.createComment = async (req, res, next) => {
 const validateLimit = (limit) => {
   const LIMIT = 30;
 
-  if (typeof limit !== "number" || typeof limit !== "string") {
+  if (typeof limit !== "number" && typeof limit !== "string") {
     return LIMIT;
   }
 
-  if (limit <= 0) {
+  if (Number(limit) <= 0) {
     return LIMIT;
   }
 
