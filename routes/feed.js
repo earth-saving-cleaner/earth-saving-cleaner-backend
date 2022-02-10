@@ -6,6 +6,7 @@ const AWS = require("aws-sdk");
 const multerS3 = require("multer-s3");
 
 const feedController = require("../contorollers/feed");
+const ploggingController = require("../contorollers/plogging");
 const { commentValidationRules, validate } = require("../middlewares/validator");
 
 const router = express.Router();
@@ -39,4 +40,5 @@ router.put("/:id/like", feedController.addLikeUser);
 
 router.get("/:id", feedController.getFeed);
 
+router.post("/:id/plogging", ploggingController.addPlogging);
 module.exports = router;

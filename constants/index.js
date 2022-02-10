@@ -7,5 +7,7 @@ exports.resultMsg = {
   Forbidden: "forbidden",
   notFound: "notFound",
   serverError: "Internal Server Error",
+  invalidFeedId: "Invalid feed id",
+  invalidUserId: "Invalid user id",
   tokenExpired: "tokenExpired",
 };
