@@ -58,6 +58,15 @@ exports.createComment = async (option) => {
   return feedComments;
 };
 
+exports.createFeed = async ({ userId, pictureUrl, content, location }) => {
+  return await Feed.create({
+    author: userId,
+    content,
+    image: pictureUrl,
+    location,
+  });
+};
+
 exports.addLikeUser = async (option) => {
   option.id = mongoose.Types.ObjectId(option.id);
   option.userId = mongoose.Types.ObjectId(option.userId);

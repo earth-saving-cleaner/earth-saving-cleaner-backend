@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const createError = require("http-errors");
 
 const feedService = require("../services/feed");
+const geoService = require("../services/geo");
 const { resultMsg } = require("../constants");
 
 exports.getFeeds = async (req, res, next) => {
@@ -93,6 +94,26 @@ exports.createComment = async (req, res, next) => {
     res.json({
       result: resultMsg.ok,
       data: comments,
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
+exports.createFeed = async (req, res, next) => {
+  try {
+    const { userId, pictureUrl, content, location } = req.body;
+
+    if (!mongoose.isValidObjectId(userId)) {
+      next(createError(400, "Invalid user id"));
+    }
+
+    const geo = await geoService.createGeo({ location });
+    const feed = await feedService.createFeed({ userId, pictureUrl, content, location: geo._id });
+
+    res.json({
+      result: resultMsg.ok,
+      data: feed,
     });
   } catch (err) {
     next(err);
