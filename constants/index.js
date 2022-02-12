@@ -7,4 +7,5 @@ exports.resultMsg = {
   Forbidden: "forbidden",
   notFound: "notFound",
   serverError: "Internal Server Error",
+  tokenExpired: "TokenExpired",
 };
