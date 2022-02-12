@@ -4,7 +4,6 @@ const { resultMsg } = require("../constants");
 
 const commentValidationRules = () => {
   return [
-    body("userId").not().isEmpty().withMessage("User id is empty").isString().withMessage("User id should be string"),
     body("content")
       .not()
       .isEmpty()
@@ -16,7 +15,6 @@ const commentValidationRules = () => {
 
 const feedValidationRules = () => {
   return [
-    body("userId").not().isEmpty().withMessage("User id is empty").isString().withMessage("User id should be string"),
     body("pictureUrl")
       .not()
       .isEmpty()
