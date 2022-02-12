@@ -7,6 +7,7 @@ const cors = require("cors");
 const http = require("http");
 const logger = require("morgan");
 
+const { resultMsg } = require("./constants");
 const webSocket = require("./loaders/socketIo");
 require("./loaders/database");
 
@@ -33,21 +34,17 @@ app.use((req, res, next) => {
   next(createError(404));
 });
 
-app.use(function (err, req, res, next) {
+app.use((err, req, res, next) => {
   console.error(err);
 
   res.locals.message = err.message || result.serverError;
   res.locals.error = req.app.get("env") === "development" ? err : {};
 
-  res.status(err.status || 500);
-  res.json({ code: res.status, message: result.serverError });
-});
+  const code = err.status || 500;
+  const message = code === 500 ? resultMsg.serverError : err.message;
 
-app.use((err, req, res, next) => {
   res.status(err.status || 500);
-  res.json({
-    code: res.status,
-  });
+  res.json({ result: resultMsg.fail, message });
 });
 
 server.listen(port);
