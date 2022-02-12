@@ -52,6 +52,12 @@ exports.createComment = async (option) => {
     { $push: { comment: comment._id } },
     { safe: true, upsert: true, new: true, populate: { path: "comment" } },
   )
+    .populate({
+      path: "comment",
+      populate: {
+        path: "author",
+      },
+    })
     .select("comment")
     .exec();
 
