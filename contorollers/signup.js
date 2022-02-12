@@ -4,7 +4,6 @@ const userService = require("../services/user");
 const { resultMsg } = require("../constants");
 
 exports.signup = async (req, res, next) => {
-  console.log(req.body);
   const { googleToken, nickname } = req.body;
 
   const badRequestResult = {
@@ -28,15 +27,18 @@ exports.signup = async (req, res, next) => {
     }
 
     try {
-      const { email, sub, picture } = verifiedUser;
-      await User.create({ email, nickname, profileImage: picture });
-      const jwtToken = await jwt.sign(sub, email);
+      const { email, picture } = verifiedUser;
+      const newUser = await User.create({ email, nickname, profileImage: picture });
+      const jwtToken = await jwt.sign(newUser._id, email);
 
       return res.status(201).json({
         result: resultMsg.ok,
         message: resultMsg.created,
         token: jwtToken.accessToken,
         email,
+        id: newUser._id,
+        profileImage: newUser.profileImage,
+        nickname: newUser.nickname,
       });
     } catch (err) {
       console.error(err);

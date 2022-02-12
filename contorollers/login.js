@@ -23,12 +23,15 @@ exports.login = async (req, res, next) => {
     }
 
     try {
-      const jwtToken = await jwt.sign(verifiedUser.sub, verifiedUser.email);
+      const jwtToken = await jwt.sign(user._id, verifiedUser.email);
 
       res.status(200).json({
         result: resultMsg.ok,
         token: jwtToken.accessToken,
         email: verifiedUser.email,
+        id: user._id,
+        profileImage: user.profileImage,
+        nickname: user.nickname,
       });
     } catch (err) {
       console.error(err);
