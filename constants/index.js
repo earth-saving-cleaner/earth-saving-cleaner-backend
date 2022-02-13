@@ -8,4 +8,6 @@ exports.resultMsg = {
   notFound: "notFound",
   serverError: "Internal Server Error",
   tokenExpired: "TokenExpired",
+  invalidFeedId: "Invalid feed id",
+  invalidUserId: "Invalid user id",
 };
