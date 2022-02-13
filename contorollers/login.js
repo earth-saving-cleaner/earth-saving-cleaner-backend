@@ -32,6 +32,8 @@ exports.login = async (req, res, next) => {
         id: user._id,
         profileImage: user.profileImage,
         nickname: user.nickname,
+        score: user.score,
+        level: user.level,
       });
     } catch (err) {
       console.error(err);
