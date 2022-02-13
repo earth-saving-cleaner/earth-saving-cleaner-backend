@@ -1,5 +1,6 @@
 const express = require("express");
 
+const { getUser } = require("../contorollers/user");
 const feed = require("./feed");
 const feeds = require("./feeds");
 const user = require("./user");

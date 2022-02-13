@@ -14,4 +14,10 @@ exports.getUserByNickname = async (nickname) => {
 
 exports.getUserByEmail = async (email) => {
   return await User.findOne({ email }).exec();
+
+exports.addUserScore = async (userId) => {
+  const { score } = await User.findOne({ _id: userId }).select("score");
+  const level = (score + 1) % 10 ? 0 : 1;
+
+  return await User.findByIdAndUpdate(userId, { $inc: { score: 1, level } }, { new: true });
 };

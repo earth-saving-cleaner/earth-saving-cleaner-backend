@@ -8,6 +8,7 @@ const multerS3 = require("multer-s3");
 const feedController = require("../contorollers/feed");
 const authJWT = require("../middlewares/authJwt");
 const { commentValidationRules, feedValidationRules, validate } = require("../middlewares/validator");
+const ploggingController = require("../contorollers/plogging");
 
 const router = express.Router();
 
@@ -40,4 +41,5 @@ router.post("/", feedValidationRules(), validate, authJWT, feedController.create
 router.put("/:id/like", authJWT, feedController.addLikeUser);
 router.get("/:id", feedController.getFeed);
 
+router.post("/:id/plogging", ploggingController.addPlogging);
 module.exports = router;

@@ -28,7 +28,7 @@ exports.getFeeds = async (option) => {
 exports.getFeed = async (id) => {
   id = mongoose.Types.ObjectId(id);
 
-  return await Feed.findOne({ author: id })
+  return await Feed.findOne({ _id: id })
     .populate("author", "nickname profileImage")
     .populate("location")
     .populate("comment", "nickname profileImage")
@@ -52,6 +52,12 @@ exports.createComment = async (option) => {
     { $push: { comment: comment._id } },
     { safe: true, upsert: true, new: true, populate: { path: "comment" } },
   )
+    .populate({
+      path: "comment",
+      populate: {
+        path: "author",
+      },
+    })
     .select("comment")
     .exec();
 
@@ -76,4 +82,8 @@ exports.addLikeUser = async (option) => {
     { $addToSet: { like: option.userId } },
     { safe: true, upsert: true, new: true },
   ).exec();
+};
+
+exports.addCleanTrue = async (id) => {
+  return await Feed.findOneAndUpdate(id, { $set: { cleaned: true } }, { new: true });
 };

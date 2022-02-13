@@ -39,6 +39,7 @@ exports.signup = async (req, res, next) => {
         id: newUser._id,
         profileImage: newUser.profileImage,
         nickname: newUser.nickname,
+
       });
     } catch (err) {
       console.error(err);
