@@ -6,12 +6,13 @@ const { resultMsg } = require("../constants");
 exports.signup = async (req, res, next) => {
   const { googleToken, nickname } = req.body;
 
-  const badRequestResult = {
-    result: resultMsg.fail,
-    message: resultMsg.badRequest,
-  };
-
-  if (!googleToken || !nickname) return res.status(400).json(badRequestResult);
+  if (!googleToken || !nickname) {
+    res.status(400).json({
+      result: resultMsg.fail,
+      message: resultMsg.badRequest,
+    });
+    return;
+  }
 
   try {
     const verifiedUser = await jwt.verifyGoogleToken(googleToken);
@@ -31,7 +32,7 @@ exports.signup = async (req, res, next) => {
       const newUser = await User.create({ email, nickname, profileImage: picture });
       const jwtToken = await jwt.sign(newUser._id, email);
 
-      return res.status(201).json({
+      res.status(201).json({
         result: resultMsg.ok,
         message: resultMsg.created,
         token: jwtToken.accessToken,
@@ -39,6 +40,8 @@ exports.signup = async (req, res, next) => {
         id: newUser._id,
         profileImage: newUser.profileImage,
         nickname: newUser.nickname,
+        level: newUser.level,
+        score: newUser.score,
       });
     } catch (err) {
       console.error(err);
