@@ -14,6 +14,7 @@ exports.getUserByNickname = async (nickname) => {
 
 exports.getUserByEmail = async (email) => {
   return await User.findOne({ email }).exec();
+};
 
 exports.addUserScore = async (userId) => {
   const { score } = await User.findOne({ _id: userId }).select("score");
