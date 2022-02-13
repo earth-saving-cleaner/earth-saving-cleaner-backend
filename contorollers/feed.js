@@ -53,7 +53,7 @@ exports.getFeed = async (req, res, next) => {
 exports.addLikeUser = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const { userId } = req.body;
+    const userId = req._id;
 
     const objectId = mongoose.Types.ObjectId(id);
     const objectUserId = mongoose.Types.ObjectId(userId);
@@ -80,7 +80,8 @@ exports.addLikeUser = async (req, res, next) => {
 exports.createComment = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const { userId, content } = req.body;
+    const { content } = req.body;
+    const userId = req.id;
 
     if (!mongoose.isValidObjectId(id)) {
       next(createError(400, "Invalid feed id"));
@@ -102,7 +103,8 @@ exports.createComment = async (req, res, next) => {
 
 exports.createFeed = async (req, res, next) => {
   try {
-    const { userId, pictureUrl, content, location } = req.body;
+    const { pictureUrl, content, location } = req.body;
+    const userId = req.id;
 
     if (!mongoose.isValidObjectId(userId)) {
       next(createError(400, "Invalid user id"));
