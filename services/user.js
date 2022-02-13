@@ -8,6 +8,13 @@ exports.getUser = async (userId) => {
   return await User.findOne({ _id: id }).select("nickname level score totalScore profileImage");
 };
 
+exports.getUserByNickname = async (nickname) => {
+  return await User.findOne({ nickname }).exec();
+};
+
+exports.getUserByEmail = async (email) => {
+  return await User.findOne({ email }).exec();
+
 exports.addUserScore = async (userId) => {
   const { score } = await User.findOne({ _id: userId }).select("score");
   const level = (score + 1) % 10 ? 0 : 1;

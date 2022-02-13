@@ -6,6 +6,7 @@ const AWS = require("aws-sdk");
 const multerS3 = require("multer-s3");
 
 const feedController = require("../contorollers/feed");
+const authJWT = require("../middlewares/authJwt");
 const { commentValidationRules, feedValidationRules, validate } = require("../middlewares/validator");
 const ploggingController = require("../contorollers/plogging");
 
@@ -35,9 +36,9 @@ router.post("/img", upload.single("img"), (req, res) => {
   res.json({ url, originalUrl: req.file.location });
 });
 
-router.post("/:id/comment", commentValidationRules(), validate, feedController.createComment);
-router.post("/", feedValidationRules(), validate, feedController.createFeed);
-router.put("/:id/like", feedController.addLikeUser);
+router.post("/:id/comment", commentValidationRules(), validate, authJWT, feedController.createComment);
+router.post("/", feedValidationRules(), validate, authJWT, feedController.createFeed);
+router.put("/:id/like", authJWT, feedController.addLikeUser);
 router.get("/:id", feedController.getFeed);
 
 router.post("/:id/plogging", ploggingController.addPlogging);
