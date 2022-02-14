@@ -22,3 +22,8 @@ exports.addUserScore = async (userId) => {
 
   return await User.findByIdAndUpdate(userId, { $inc: { score: 1, level } }, { new: true });
 };
+
+const LIMIT = 10;
+exports.getRank = async () => {
+  return await User.find().sort({ score: -1 }).limit(LIMIT).exec();
+};

@@ -23,3 +23,16 @@ exports.getUser = async (req, res, next) => {
     next(err);
   }
 };
+
+exports.getRankList = async (req, res, next) => {
+  try {
+    const rankList = await userService.getRank();
+
+    res.json({
+      result: resultMsg.ok,
+      rankList,
+    });
+  } catch (err) {
+    next(err);
+  }
+};
