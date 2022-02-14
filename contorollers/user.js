@@ -2,7 +2,6 @@ const mongoose = require("mongoose");
 const createError = require("http-errors");
 
 const userService = require("../services/user");
-const rankService = require("../services/rank");
 const { resultMsg } = require("../constants");
 
 exports.getUser = async (req, res, next) => {
@@ -27,7 +26,7 @@ exports.getUser = async (req, res, next) => {
 
 exports.getRankList = async (req, res, next) => {
   try {
-    const rankList = await rankService.getRank();
+    const rankList = await userService.getRank();
 
     res.json({
       result: resultMsg.ok,
