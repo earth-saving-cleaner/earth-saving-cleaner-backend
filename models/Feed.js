@@ -27,6 +27,10 @@ const feedSchema = new Schema(
       ref: "Geo",
       require: [true, "Please provide Geo information"],
     },
+    address: {
+      type: String,
+      require: [true, "Please provide an address"],
+    },
     like: [
       {
         type: ObjectId,

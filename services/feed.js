@@ -64,12 +64,13 @@ exports.createComment = async (option) => {
   return feedComments;
 };
 
-exports.createFeed = async ({ userId, pictureUrl, content, location }) => {
+exports.createFeed = async ({ userId, pictureUrl, content, location, address }) => {
   return await Feed.create({
     author: userId,
     content,
     image: pictureUrl,
     location,
+    address,
   });
 };
 
