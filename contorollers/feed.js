@@ -103,7 +103,7 @@ exports.createComment = async (req, res, next) => {
 
 exports.createFeed = async (req, res, next) => {
   try {
-    const { pictureUrl, content, location } = req.body;
+    const { pictureUrl, content, location, address } = req.body;
     const userId = req.id;
 
     if (!mongoose.isValidObjectId(userId)) {
@@ -111,7 +111,7 @@ exports.createFeed = async (req, res, next) => {
     }
 
     const geo = await geoService.createGeo({ location });
-    const feed = await feedService.createFeed({ userId, pictureUrl, content, location: geo._id });
+    const feed = await feedService.createFeed({ userId, pictureUrl, content, location: geo._id, address });
 
     res.json({
       result: resultMsg.ok,
