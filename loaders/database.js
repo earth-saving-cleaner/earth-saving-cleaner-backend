@@ -4,7 +4,7 @@ let connectCount = 0;
 
 const connect = () => {
   mongoose.connect(
-    process.env.DB_ATLAS_URL,
+    process.env.DB_ATLAS,
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,
