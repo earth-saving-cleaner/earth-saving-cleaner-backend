@@ -3,9 +3,9 @@ const { OAuth2Client } = require("google-auth-library");
 
 const { resultMsg } = require("../constants");
 
-const client = new OAuth2Client(process.env.CLIENT_ID);
+const client = new OAuth2Client(process.env.GOOGLE_ID);
 
-const secretKey = process.env.JWT_SECRET_KEY;
+const secretKey = process.env.JWT;
 const accessTokenOption = {
   algorithm: "HS256",
   expiresIn: "1h",
@@ -38,7 +38,7 @@ module.exports = {
     try {
       const ticket = await client.verifyIdToken({
         idToken: token,
-        audience: process.env.CLIENT_ID,
+        audience: process.env.GOOGLE_ID,
       });
       const { sub, email, picture } = ticket.getPayload();
 

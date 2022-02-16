@@ -13,8 +13,8 @@ const ploggingController = require("../contorollers/plogging");
 const router = express.Router();
 
 AWS.config.update({
-  accessKeyId: process.env.S3_ACCESS_KEY_ID,
-  secretAccessKey: process.env.S3_SECRET_ACCESS_KEY,
+  accessKeyId: process.env.S3_ACCESS,
+  secretAccessKey: process.env.S3_SECRET,
   region: "ap-northeast-2",
 });
 
