@@ -53,7 +53,7 @@ exports.getFeed = async (req, res, next) => {
 exports.addLikeUser = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const userId = req._id;
+    const { userId } = req.body;
 
     const objectId = mongoose.Types.ObjectId(id);
     const objectUserId = mongoose.Types.ObjectId(userId);
