@@ -11,6 +11,14 @@ exports.getFeedsLocation = async (coordinates) => {
       },
     },
     {
+      $lookup: {
+        from: "users",
+        localField: "author",
+        foreignField: "_id",
+        as: "author",
+      },
+    },
+    {
       $match: {
         location: {
           $geoWithin: {
@@ -23,7 +31,7 @@ exports.getFeedsLocation = async (coordinates) => {
       },
     },
     {
-      $project: { image: 1, coordinates: { $arrayElemAt: ["$location.coordinates", 0] }, cleaned: 1 },
+      $project: { image: 1, coordinates: { $arrayElemAt: ["$location.coordinates", 0] }, cleaned: 1, author: 1 },
     },
   ]);
 };
