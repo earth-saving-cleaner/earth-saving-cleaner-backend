@@ -18,11 +18,13 @@ exports.getFeeds = async (req, res, next) => {
       limit: validateLimit(limit),
     };
 
+    const total = await feedService.getFeedTotalCount();
     const feeds = await feedService.getFeeds(option);
     const result = {
       result: resultMsg.ok,
       lastId: feeds[feeds.length - 1]._id,
       data: feeds,
+      total,
     };
 
     res.json(result);
