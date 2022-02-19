@@ -8,7 +8,7 @@ const client = new OAuth2Client(process.env.GOOGLE_ID);
 const secretKey = process.env.JWT;
 const accessTokenOption = {
   algorithm: "HS256",
-  expiresIn: "1h",
+  expiresIn: "14d",
 };
 
 module.exports = {
