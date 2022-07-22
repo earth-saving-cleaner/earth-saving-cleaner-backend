@@ -9,8 +9,7 @@ exports.getFeedTotalCount = async () => {
 
 exports.getFeeds = async (option) => {
   const { lastId, limit } = option;
-  console.log("lastId =====>", lastId);
-  console.log("limit =====>", limit);
+
   if (lastId) {
     const id = mongoose.Types.ObjectId(lastId);
 
