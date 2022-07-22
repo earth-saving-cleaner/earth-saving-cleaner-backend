@@ -89,11 +89,11 @@ Local 환경에서 실행 시 아래와 같이 환경 변수를 입력해 주세
 
 ### Client
 
-Start
+**Start**
 ```
 yarn start
 ```
-환경 변수 설정 (.env)
+**환경 변수 설정 (.env)**
 
 ```
 REACT_APP_GOOGLE_CLIENT_ID="your client id"
@@ -104,12 +104,12 @@ REACT_APP_GOOGLE_MAP_API_KEY="your map api"
 
 ### Server
 
-Start
+**Start**
 ```
 yarn start
 ```
 
-환경 변수 설정 (.env)
+**환경 변수 설정 (.env)**
 ```
 PORT=5000
 CLIENT_URL=http://localhost:3000
