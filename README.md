@@ -1,6 +1,6 @@
 # 🌏 Earth Saving Cleaner
 
-**오염된 장소를 공유하고 플로깅 활동을 하세요!**
+### 오염된 장소를 공유하고 플로깅 활동을 하세요!
 
 <details>
   <summary>What is plogging?</summary>
@@ -29,21 +29,21 @@ Earth Saving Cleaner는 오염된 장소에서 사진을 촬영하여 게시물�
 
 
 ## 🌼 Features
-<img width="260" alt="main_page" src="https://user-images.githubusercontent.com/54696956/179362025-20a1e6a0-6c17-4a9e-abb3-ff0abe11520a.png">
-<img width="255" alt="map_page" src="https://user-images.githubusercontent.com/54696956/179362674-66e9f81b-6199-4e56-8b0a-1c8e26eee786.png">
+<img width="450" alt="main_page" src="https://user-images.githubusercontent.com/54696956/179362025-20a1e6a0-6c17-4a9e-abb3-ff0abe11520a.png">
+<img width="445" alt="map_page" src="https://user-images.githubusercontent.com/54696956/179362674-66e9f81b-6199-4e56-8b0a-1c8e26eee786.png">
 <br>
 <details>
   <summary>More images</summary>
-  <img width="250" alt="add_feed" src="https://user-images.githubusercontent.com/54696956/179363152-1341cded-f140-4eec-9990-679e1e12c2a5.png">
+  <img width="420" alt="add_feed" src="https://user-images.githubusercontent.com/54696956/179363152-1341cded-f140-4eec-9990-679e1e12c2a5.png">
 피드 등록
 <br>
-<img width="250" alt="feed_detail" src="https://user-images.githubusercontent.com/54696956/179363435-8cb22bf7-fca8-47bc-a445-27a7cf54f922.png">
+<img width="420" alt="feed_detail" src="https://user-images.githubusercontent.com/54696956/179363435-8cb22bf7-fca8-47bc-a445-27a7cf54f922.png">
 피드 상세(댓글, 좋아요 기능)
 <br>
-<img width="250" alt="mypage" src="https://user-images.githubusercontent.com/54696956/179363202-6caea358-3695-4edb-910b-f7e09bdfc5a3.png">
+<img width="420" alt="mypage" src="https://user-images.githubusercontent.com/54696956/179363202-6caea358-3695-4edb-910b-f7e09bdfc5a3.png">
 마이 페이지
 <br>
-<img width="250" alt="quest_certification" src="https://user-images.githubusercontent.com/54696956/179363356-85e14673-8447-4399-b9e7-8f0dd580b8a4.png">
+<img width="420" alt="quest_certification" src="https://user-images.githubusercontent.com/54696956/179363356-85e14673-8447-4399-b9e7-8f0dd580b8a4.png">
 퀘스트 인증
 </details>
 
@@ -87,7 +87,7 @@ Earth Saving Cleaner는 오염된 장소에서 사진을 촬영하여 게시물�
 
 Local 환경에서 실행 시 아래와 같이 환경 변수를 입력해 주세요.
 
-**Client**
+### Client
 
 Start
 ```
@@ -102,7 +102,7 @@ REACT_APP_SERVER_URL=http://localhost:5000
 REACT_APP_GOOGLE_MAP_API_KEY="your map api"
 ```
 
-**Server**
+### Server
 
 Start
 ```
