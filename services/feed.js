@@ -3,6 +3,10 @@ const mongoose = require("mongoose");
 const Feed = require("../models/Feed");
 const Comment = require("../models/Comment");
 
+exports.getFeedTotalCount = async () => {
+  return await Feed.countDocuments();
+};
+
 exports.getFeeds = async (option) => {
   const { lastId, limit } = option;
   console.log("lastId =====>", lastId);
